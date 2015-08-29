@@ -1,1 +1,10 @@
 E:\Github\BuckBeak\GTU-Question-Paper-Extractor\Gquipe\Gquipe\bin\Debug\Gquipe.exe.config
+E:\Github\Gquipe\Gquipe\bin\Debug\Gquipe.exe.config
+E:\Github\Gquipe\Gquipe\bin\Debug\Gquipe.exe
+E:\Github\Gquipe\Gquipe\bin\Debug\Gquipe.pdb
+E:\Github\Gquipe\Gquipe\obj\Debug\Gquipe.csprojResolveAssemblyReference.cache
+E:\Github\Gquipe\Gquipe\obj\Debug\Gquipe.Main.resources
+E:\Github\Gquipe\Gquipe\obj\Debug\Gquipe.Properties.Resources.resources
+E:\Github\Gquipe\Gquipe\obj\Debug\Gquipe.csproj.GenerateResource.Cache
+E:\Github\Gquipe\Gquipe\obj\Debug\Gquipe.exe
+E:\Github\Gquipe\Gquipe\obj\Debug\Gquipe.pdb
