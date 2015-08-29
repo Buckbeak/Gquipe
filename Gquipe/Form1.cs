@@ -23,7 +23,7 @@ namespace Gquipe
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C tasklist";
+            startInfo.Arguments = "/C wget --continue --timestamping --directory-prefix=C:\\Users\\pratikid\\Desktop --recursive --level=0 --accept=170701.zip  http://www.gtu.ac.in/Qpaper.html";
             process.StartInfo = startInfo;
             process.Start();
         }
