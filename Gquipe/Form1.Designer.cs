@@ -36,9 +36,10 @@
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(117, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(655, 20);
+            this.textBox1.Size = new System.Drawing.Size(655, 31);
             this.textBox1.TabIndex = 0;
             // 
             // folderBrowserDialog1

@@ -44,11 +44,11 @@ namespace Gquipe
 
                 if (result == DialogResult.OK)
                 {
-                    ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd", "/C wget --continue --timestamping --directory-prefix=" + foldername + " --recursive --level=1 --accept="+input_sub_code +" http://www.gtu.ac.in/Qpaper.html");
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd", "/C wget --continue --timestamping --directory-prefix=" + foldername + " --recursive --level=0 --accept="+input_sub_code +" http://www.gtu.ac.in/Qpaper.html");
                     processStartInfo.RedirectStandardOutput = true;
                     processStartInfo.RedirectStandardError = true;
                     processStartInfo.WindowStyle = ProcessWindowStyle.Normal;
-                    processStartInfo.UseShellExecute = true;
+                    processStartInfo.UseShellExecute = false;
 
                     Process process = Process.Start(processStartInfo);
 
@@ -71,12 +71,12 @@ namespace Gquipe
                         //Console.WriteLine("The following error was detected:");
                         Console.WriteLine(error);
                     }
-
+                    process.WaitForExit(6000000);
                     //Console.Read();
                 }
 
                 MessageBox.Show(Application.StartupPath);
-
+                /*
                 ProcessStartInfo opencurrentdir = new ProcessStartInfo("cmd", "/C " + foldername.Substring(0, 2).ToString());
                 opencurrentdir.RedirectStandardOutput = true;
                 opencurrentdir.RedirectStandardError = true;
@@ -100,7 +100,7 @@ namespace Gquipe
                 process1.WaitForExit();
 
                 //E:\Github\Gquipe\Gquipe\bin\Debug
-
+                */
 
             }
         }
@@ -114,7 +114,7 @@ namespace Gquipe
             foreach (string value in array)
             {
                 builder.Append(value);
-                builder.Append('.');
+                builder.Append(',');
             }
             return builder.ToString();
         }
