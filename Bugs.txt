@@ -1,0 +1,10 @@
+Tasks not completed yet
+
+1. Showing output screen in the software itself.
+https://msdn.microsoft.com/en-us/library/system.diagnostics.process.beginoutputreadline.aspx
+
+2. Providing validations.
+Providing Validation on input given to users.
+
+3. Test inputs for
+170701,170702,170703,
