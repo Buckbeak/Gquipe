@@ -12,7 +12,6 @@ namespace Gquipe
 {
     public partial class Main : Form
     {
-        int time_sec = 0;
         public Main()
         {
             InitializeComponent();
@@ -20,11 +19,11 @@ namespace Gquipe
 
         private void Main_Load(object sender, EventArgs e)
         {
-            //folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Stopwatch time_e = new Stopwatch();
             if (textBox1.Text == "")
             {
                 textBox1.Focus();
@@ -46,8 +45,10 @@ namespace Gquipe
 
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
+                    time_e.Start();
+
                     foldername = this.folderBrowserDialog1.SelectedPath;
-                    /*
+                    
                     ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd", "/C wget --continue --timestamping --directory-prefix=" + foldername + " --recursive --level=0 --accept="+input_sub_code+" http://www.gtu.ac.in/Qpaper.html");
                     //processStartInfo.RedirectStandardOutput = true;
                     //processStartInfo.RedirectStandardError = true;
@@ -55,14 +56,9 @@ namespace Gquipe
                     //processStartInfo.UseShellExecute = false;
 
                     Process process = Process.Start(processStartInfo);
-                    //timer1.Enabled = true;
-                    //timer1.Start();
                     process.WaitForExit();
-                    //timer1.Stop();
-                    //timer1.Enabled = false;
- 
+
                     /*
-                    
                     using (StreamReader streamReader = process.StandardOutput)
                     {
                         output = streamReader.ReadToEnd();
@@ -73,77 +69,49 @@ namespace Gquipe
                         error = streamReader.ReadToEnd();
                     }
 
-                    Console.WriteLine("The following output was detected:");
                     Console.WriteLine(output);
 
                     if (!string.IsNullOrEmpty(error))
                     {
-                        //Console.WriteLine("The following error was detected:");
                         Console.WriteLine(error);
                     }
-                    //process.WaitForExit(6000000);
-                    //Console.Read();
-                    
                     */
-                    
                 }
-               
-                //MessageBox.Show(Application.StartupPath);
-                
-                /*
-                ProcessStartInfo opencurrentdir = new ProcessStartInfo("cmd", "/C " + foldername.Substring(0, 2).ToString());
-                opencurrentdir.RedirectStandardOutput = true;
-                opencurrentdir.RedirectStandardError = true;
-                //processStartInfo1.WindowStyle = ProcessWindowStyle.Maximized;
-                opencurrentdir.WindowStyle = ProcessWindowStyle.Normal;
-                opencurrentdir.UseShellExecute = false;
-
-                Process process1 = new Process();
-                process1.StartInfo = opencurrentdir;
-                //process1.WaitForExit(10000);
-                process1.Start();
-                 * 
-                ProcessStartInfo setpath = new ProcessStartInfo("cmd", "/C " + foldername.Substring(0, 2).ToString());
-                setpath.RedirectStandardOutput = true;
-                setpath.RedirectStandardError = true;
-                setpath.WindowStyle = ProcessWindowStyle.Normal;
-                setpath.UseShellExecute = false;
-                process1 = Process.Start(setpath);
-                process1.WaitForExit();
-
-                */
                 string download_loc=foldername + @"\www.gtu.ac.in\GTU_Papers";
                 RemoveEmptyFolders(download_loc);
                 DirSearch(download_loc,"*.zip");
 
                 foreach (var item in listBox1.Items)
 	            {
-                    //ZipFile.CreateFromDirectory();
 		            ZipFile.ExtractToDirectory(item.ToString(),Path.GetDirectoryName(item.ToString()));
-                    File.Delete(item.ToString());
-                
+                    File.Delete(item.ToString());     
                 }
 
                 List<string> list = new List<string>();
                 listBox1.Items.Clear();
                 DirSearch(download_loc, "*.pdf");
+
                 foreach (var item in listBox1.Items)
                 {
-                    File.Move(item.ToString(), Directory.GetParent(item.ToString()) +"_"+Path.GetFileName(item.ToString()));
                     list.Add(Path.GetFileNameWithoutExtension(item.ToString()).ToString());
                 }
 
-                /*
                 List<string> list_file = new List<string>();
                 list_file = list.Distinct().ToList();
                 foreach (var item in list_file)
                 {
                     Directory.CreateDirectory(Directory.GetParent(Directory.GetParent(listBox1.Items[0].ToString()).ToString()) + "\\" + Path.GetFileNameWithoutExtension(item.ToString()));
                 }
-                */
 
+                foreach (var item in listBox1.Items)
+                {
+                    File.Move(item.ToString(), Directory.GetParent(Directory.GetParent(listBox1.Items[0].ToString()).ToString()).ToString() + "\\" + Path.GetFileNameWithoutExtension(item.ToString()) + "\\" + Directory.GetParent(item.ToString()).Name + "_" + Path.GetFileName(item.ToString()));
+                }
                 RemoveEmptyFolders(download_loc);
-                MessageBox.Show("Complete");
+                
+                //ZipFile.CreateFromDirectory();
+                time_e.Stop();
+                MessageBox.Show(time_e.Elapsed.Hours.ToString() + ":" + time_e.Elapsed.Minutes.ToString() + ":" + time_e.Elapsed.Seconds.ToString() + "." + time_e.Elapsed.Milliseconds.ToString());
             }
         }
 
@@ -156,7 +124,6 @@ namespace Gquipe
                     foreach (string file in Directory.GetFiles(sub_dir, ext))
                     {
                         listBox1.Items.Add(file);
-                        //File.Move();
                     }
                     DirSearch(sub_dir,ext);
                 }
@@ -190,11 +157,6 @@ namespace Gquipe
                 builder.Append(value+',');
             }
             return builder.ToString();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            time_sec++;
         }
     }
 }
