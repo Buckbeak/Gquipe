@@ -7,4 +7,9 @@ https://msdn.microsoft.com/en-us/library/system.diagnostics.process.beginoutputr
 Providing Validation on input given to users.
 
 3. Test inputs for
-170701,170702,170703,
+170701,170702,170703
+
+4. Applying GUI using Material Design
+Material Design Icons by google
+
+5. Asking for user's suggestion

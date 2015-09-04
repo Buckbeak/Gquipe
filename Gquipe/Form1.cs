@@ -7,6 +7,7 @@ using System.Text;
 using System.Linq;
 using System.IO.Compression;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Gquipe
 {
@@ -158,5 +159,27 @@ namespace Gquipe
             }
             return builder.ToString();
         }
+
+        static string CheckSpeed()
+        {
+            double[] speeds = new double[5];
+            for (int i = 0; i < 5; i++)
+            {
+                int jQueryFileSize = 261; //Size of File in KB.
+                WebClient client = new WebClient();
+                DateTime startTime = DateTime.Now;
+                client.DownloadFile("http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js","jQuery.js");//, Server.MapPath("~/jQuery.js")
+                File.Delete("jQuery.js");
+                DateTime endTime = DateTime.Now;
+                speeds[i] = Math.Round((jQueryFileSize / (endTime - startTime).TotalSeconds));
+            }
+            return string.Format("Download Speed: {0}KB/s", speeds.Average());
+        }
+
+        private void btn_Speed_Check_Click(object sender, EventArgs e)
+        {
+            lbl_Net_Speed.Text= CheckSpeed();
+        }
+
     }
 }
